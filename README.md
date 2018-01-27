@@ -56,6 +56,7 @@ Remember to shut down the server:
     });
     
 The HttpHandler interface declares only one function onHandle from which you get the object of class Exchange. The object, Exchange, contains information from a client request such as:
+
 * path (the path set on routing e.g "/home")
 * URI  (the complete browsable link from the above path e.g "http://192.168.0.34:8888/home")
 * port (the port the server is running on e.g 8888)
@@ -68,6 +69,7 @@ The HttpHandler interface declares only one function onHandle from which you get
 * response Headers (to be sent to the client)
 
 The onHandle function requires a return of an object of a class implementing Response interface. This response will be sent to the client. To build the response easily, a class ResponseHandler is used. Sample responses include:
+
 * ResponseHandler.string("content");  // a String response. Can be a html string  
 * ResponseHandler.asset("file name");  //To return a file saved in android asset folder
 * ResponseHandler.file(new File("")); //To return a file
