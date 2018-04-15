@@ -35,19 +35,22 @@ Add permission in manifest file
     };
     
     localServer.start(); // also used to restart the server when stoped
-   ```
+ ```
    
 Remember to shut down the server:
-    ```javascript
+
+```javascript
     localServer.stop();
-    ```
+```
     
  To check whether server is running:
+ 
  ```javascript
     localServer.isRunning();
-    ```
+ ```
     
 # Routing
+
 ```javascript
     localServer.route("path", HttpHandler);  //first input is the path, second is a class implementing a HttpHandler interface
 
@@ -57,7 +60,7 @@ Remember to shut down the server:
             return ResponseHandler.string("content");
         }
     });
-    ```
+```
     
 The HttpHandler interface declares only one function onHandle from which you get the object of class Exchange. The object, Exchange, contains information from a client request such as:
 
@@ -94,6 +97,7 @@ The onHandle function requires a return of an object of a class implementing Res
 # Route Parameters
 
 To capture segments of the URI within your route:
+
 ```javascript
     localServer.route("/client/{client_id}", new HttpHandler() {
         @Override
@@ -108,9 +112,10 @@ To capture segments of the URI within your route:
             return ResponseHandler.string("content");
         }
     });
-    ```
+```
     
 To set Regular Expression Constraints on the parameter add the splitter '|' followed by the constraint:
+
 ```javascript
     localServer.route("/client/{client_id|[0-9]+}", new HttpHandler() {  // ensures that client_id must be numeric
         @Override
@@ -125,21 +130,23 @@ To set Regular Expression Constraints on the parameter add the splitter '|' foll
             return ResponseHandler.string("content");
         }
     });
-    ```
+```
     
 You may define as many route parameters as required by your route:
-    ```javascript
+
+```javascript
     localServer.route("/client/{client_id}/comments/{comment}", new HttpHandler() {
         @Override
         public Response onHandle(Exchange exchange) {
             
         }
     });
-    ```
+```
 
 # Routing the 404 Not Found
 
 To create a custom response for a '404 Not Found':
+
 ```javascript
     localServer.route404(new HttpHandler() {
         @Override
@@ -152,6 +159,7 @@ To create a custom response for a '404 Not Found':
 # Creating a Catch-All route (Intercepting the 404 Not Found)       
 
 A catch-all route can be used to catch all client requests that are not routed. This intercepts the 404 not found route.
+
 ```javascript
     localServer.route404Intercept(new HttpHandler() {
         @Override
@@ -161,22 +169,24 @@ A catch-all route can be used to catch all client requests that are not routed. 
             return ResponseHandler.string("content");
         }
     });
-    ```
+```
     
 # Capture Basic Auth Credentials 
 
 The basic auth value from a client can be catured from the request headers of the Exchange. To easen this process a RequestHandler class is used:
+
 ```javascript
     HashMap<String, String> credentials = RequestHandler.getBasicAuthCredentials(exchange);
     if(credentials != null){
         String username = credentials.get("username");
         String password = credentials.get("password");
     }
-    ```
+```
     
 # Capture Files from Parameters
 
 Let us assume that a .png image file has been posted among the parameters by a client using the key "avatar":
+
 ```javascript
     HashMap<String, Object> parameters = exchange.getParameters();
     Object avatar = parameters.get("avatar"); 
@@ -197,7 +207,7 @@ Let us assume that a .png image file has been posted among the parameters by a c
             }
         } catch (Exception ex) {}
     }
-    ```
+```
     
 # Note
 
