@@ -11,7 +11,7 @@ Add permission in manifest file
 ```<uses-permission android:name="android.permission.INTERNET" />```
 
 # Usage Example
-
+```javascript
     localServer = new LocalServer(context) {
         @Override
         public int onInitPort() {
@@ -35,17 +35,20 @@ Add permission in manifest file
     };
     
     localServer.start(); // also used to restart the server when stoped
+   ```
    
 Remember to shut down the server:
-    
+    ```javascript
     localServer.stop();
+    ```
     
  To check whether server is running:
- 
+ ```javascript
     localServer.isRunning();
+    ```
     
 # Routing
-
+```javascript
     localServer.route("path", HttpHandler);  //first input is the path, second is a class implementing a HttpHandler interface
 
     localServer.route("/", new HttpHandler() {    // example using an anonymous class implementing HttpHandler interface
@@ -54,6 +57,7 @@ Remember to shut down the server:
             return ResponseHandler.string("content");
         }
     });
+    ```
     
 The HttpHandler interface declares only one function onHandle from which you get the object of class Exchange. The object, Exchange, contains information from a client request such as:
 
@@ -70,6 +74,7 @@ The HttpHandler interface declares only one function onHandle from which you get
 
 The onHandle function requires a return of an object of a class implementing Response interface. This response will be sent to the client. To build the response easily, a class ResponseHandler is used. Sample responses include:
 
+```javascript
 * ResponseHandler.string("content");  // a String response. Can be a html string  
 * ResponseHandler.asset("file name");  //To return a file saved in android asset folder
 * ResponseHandler.file(new File("")); //To return a file
@@ -84,11 +89,12 @@ The onHandle function requires a return of an object of a class implementing Res
 * ResponseHandler.requireAuthBasic("realm"); // a 401 Access Denied response
 * ResponseHandler.throw404(); // a 404 Not Found response
 * null; // equivalent to ResponseHandler.throw404();
+```
 
 # Route Parameters
 
 To capture segments of the URI within your route:
-
+```javascript
     localServer.route("/client/{client_id}", new HttpHandler() {
         @Override
         public Response onHandle(Exchange exchange) {
@@ -102,9 +108,10 @@ To capture segments of the URI within your route:
             return ResponseHandler.string("content");
         }
     });
+    ```
     
 To set Regular Expression Constraints on the parameter add the splitter '|' followed by the constraint:
-
+```javascript
     localServer.route("/client/{client_id|[0-9]+}", new HttpHandler() {  // ensures that client_id must be numeric
         @Override
         public Response onHandle(Exchange exchange) {
@@ -118,32 +125,34 @@ To set Regular Expression Constraints on the parameter add the splitter '|' foll
             return ResponseHandler.string("content");
         }
     });
+    ```
     
 You may define as many route parameters as required by your route:
-    
+    ```javascript
     localServer.route("/client/{client_id}/comments/{comment}", new HttpHandler() {
         @Override
         public Response onHandle(Exchange exchange) {
             
         }
     });
-    
+    ```
 
 # Routing the 404 Not Found
 
 To create a custom response for a '404 Not Found':
-
+```javascript
     localServer.route404(new HttpHandler() {
         @Override
         public Response onHandle(Exchange exchange) {
             return ResponseHandler.string("content"); // This will be the response every time you throw a 404 error response using ResponseHandler.throw404(); or when the server does not find a set routing for a request from a client.
         }
     });
+```
 
 # Creating a Catch-All route (Intercepting the 404 Not Found)       
 
 A catch-all route can be used to catch all client requests that are not routed. This intercepts the 404 not found route.
-
+```javascript
     localServer.route404Intercept(new HttpHandler() {
         @Override
         public Response onHandle(Exchange exchange) {
@@ -152,21 +161,23 @@ A catch-all route can be used to catch all client requests that are not routed. 
             return ResponseHandler.string("content");
         }
     });
+    ```
     
 # Capture Basic Auth Credentials 
 
 The basic auth value from a client can be catured from the request headers of the Exchange. To easen this process a RequestHandler class is used:
-
+```javascript
     HashMap<String, String> credentials = RequestHandler.getBasicAuthCredentials(exchange);
     if(credentials != null){
         String username = credentials.get("username");
         String password = credentials.get("password");
     }
+    ```
     
 # Capture Files from Parameters
 
 Let us assume that a .png image file has been posted among the parameters by a client using the key "avatar":
-
+```javascript
     HashMap<String, Object> parameters = exchange.getParameters();
     Object avatar = parameters.get("avatar"); 
     if (avatar instanceof HashMap) { // A value of type HashMap signifies a file from parameters
@@ -186,7 +197,7 @@ Let us assume that a .png image file has been posted among the parameters by a c
             }
         } catch (Exception ex) {}
     }
-    
+    ```
     
 # Note
 
