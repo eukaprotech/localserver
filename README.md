@@ -168,9 +168,9 @@ The basic auth value from a client can be catured from the request headers of th
 Let us assume that a .png image file has been posted among the parameters by a client using the key "avatar":
 
     HashMap<String, Object> parameters = exchange.getParameters();
-    Object avatar = parameters.get("avatar"); //assuming th
-    if (avatar instanceof HashMap) { // A value of type HashMap signifies a file
-        HashMap<String, Object> fileMap = (HashMap<String, Object>) avatar;
+    Object avatar = parameters.get("avatar"); 
+    if (avatar instanceof HashMap) { // A value of type HashMap signifies a file from parameters
+        HashMap<String, Object> fileMap = (HashMap<String, Object>) avatar;
         String filename = fileMap.get("filename").toString();
         String contentType = fileMap.get("Content-Type").toString();
         Object _file = fileMap.get("file");
