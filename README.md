@@ -11,6 +11,7 @@ Add permission in manifest file
 ```<uses-permission android:name="android.permission.INTERNET" />```
 
 # Usage Example
+
 ```javascript
     localServer = new LocalServer(context) {
         @Override
@@ -216,4 +217,4 @@ Let us assume that a .png image file has been posted among the parameters by a c
 * The server does not allow slashes in route parameters regardless of how you define the constraint. In case you require parameters with slashes, utilise query parameters.
 * If both the server and client are on the same device, avoid letting the server overwrite the files sent by the client; definitely this will corrupt the transfer of the files. 
 * The server can handle multiple clients through multithreading. 
-* One of the applications of this server would be creating a local media server; whereby you can share/browse media files from a device. Any frequently required resources such as javascript or css files can be bundled in an android app under the assets folder and returned to clients using ResponseHandler.asset("file name");.
+* One of the applications of this server would be creating a local media server; whereby you can share/browse media files from a device. Any frequently required resources such as javascript or css files can be bundled in an android app under the assets folder and returned to clients using ```javascript ResponseHandler.asset("file name");```.
