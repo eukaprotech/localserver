@@ -221,3 +221,5 @@ Let us assume that a .png image file has been posted among the parameters by a c
 * If both the server and client are on the same device, avoid letting the server overwrite the files sent by the client; definitely this will corrupt the transfer of the files. 
 * The server can handle multiple clients through multithreading. 
 * One of the applications of this server would be creating a local media server; whereby you can share/browse media files from a device. Any frequently required resources such as javascript or css files can be bundled in an android app under the assets folder and returned to clients using ResponseHandler.asset("file name");.
+
+[ ![Download](https://api.bintray.com/packages/eukaprotech/maven/localserver/images/download.svg) ](https://bintray.com/eukaprotech/maven/localserver/_latestVersion)
