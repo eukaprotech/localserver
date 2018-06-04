@@ -1,7 +1,10 @@
 # Description
 An android server based on ServerSocket.
 
-# Getting Started
+# Versions
+* [V1.0.0](https://github.com/eukaprotech/networking/blob/master/com/eukaprotech/localserver/localserver/1.0.0/README.md "Version 1.0.0 Overview")
+
+# Getting Started (V1.0.0)
 Add the dependency in build.gradle (App module)
 
 ```compile 'com.eukaprotech.localserver:localserver:1.0.0@aar'```
@@ -10,7 +13,7 @@ Add permission in manifest file
 
 ```<uses-permission android:name="android.permission.INTERNET" />```
 
-# Usage Example
+# Usage (V1.0.0)
 
 ```javascript
     localServer = new LocalServer(context) {
